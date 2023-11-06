@@ -386,3 +386,39 @@
 			_G.Clip = false
 		end
 	end
+
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+		game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		wait(1)
+		game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+	end)
+
+	--// Get Weapon Sword
+	function GetWeaponInventory(Weaponname)
+		for i,v in pairs(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")) do
+		if type(v) == "table" then
+		if v.Type == "Sword" then
+		if v.Name == Weaponname then
+		return true
+		end
+		end
+		end
+		end
+		return false
+		end
+	--// Equip Gun Mastery
+	spawn(function()
+		pcall(function()
+		 while task.wait() do
+		 for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+		 if v:IsA("Tool") then
+		 if v:FindFirstChild("RemoteFunctionShoot") then
+		 CurrentEquipGun = v.Name
+		 end
+		 end
+		 end
+		 end
+		 end)
+		end)
+
+  
